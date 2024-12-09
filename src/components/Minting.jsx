@@ -47,17 +47,23 @@ const Minting = ({ wallet, chain, stats, reload, woolBalance }) => {
     };
 
     const onMint = async (stake) => {
+        console.log('Click on MINT button')
         setLoading(true);
         setError(null);
         try {
             let hash;
 
             if (paymentToken === PAY_WITH.AVAX) {
+                console.log('Mint with avax')
                 hash = (await mint(stake, amount, requiresEth())).hash;
             } else if (paymentToken === PAY_WITH.TRACTOR) {
+                console.log('Mint with tracktor')
+
                 await approve("0x542fa0b261503333b90fe60c78f2beed16b7b7fd", process.env.REACT_APP_WOOLF);
                 hash = (await mintWithTractor(amount)).hash;
             } else if (paymentToken === PAY_WITH.JOE) {
+                console.log('Mint with joe')
+
                 await approve("0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd", process.env.REACT_APP_WOOLF);
                 hash = (await mintWithJoe(amount)).hash;
             } else {
